@@ -84,7 +84,9 @@ ITFormer-ICML25/
 ├── inference_results/             # Inference的结果
 │   ├── inference_results.json       # 对于测试集的问题，模型的答案
 │   └── infer_metrics.json           # 在 inference.py 产生的评价指标
-└── metrics_eval.txt               # 在 train_sft.py 产生的评价指标
+├── metrics_eval.txt               # 在 train_sft.py 产生的评价指标
+│
+└── .gitignore                     # github的配置文件
 </pre>
 
 ### 2. Environment Setup and Dependencies
