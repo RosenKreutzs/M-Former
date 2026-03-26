@@ -1,39 +1,42 @@
-# ITFormer
+# M-Former
 
-此资源库提供了 ITFormer（Instruct Time Transformer）的官方开源实现，ITFormer 是一种用于时间-文本多模态问答（QA）的新型框架。
+此资源库提供了M-Former（的官方开源实现，M-Former 是一种用于时间-文本多模态问答（QA）的新型框架。
 
 ## Overview
 
-ITFormer（Instruct Time Transformer）是一款用于时态-文本多模态问答的顶尖模型。此资源库提供了官方的开源实现版本，其中包括推理和训练脚本。
+M-Former是一款用于时态-文本多模态问答的顶尖模型。此资源库提供了官方的开源实现版本，其中包括推理和训练脚本。
 
-我们的研究引入了一个大规模的多任务数据集([EngineMT-QA][EngineMT-QA])，并展示了 ITFormer 在将时间序列数据与自然语言理解相结合方面表现出的卓越性能。值得一提的是，我们的 0.5 亿参数模型体积小巧、运行高效，同时仍能取得出色的效果。
+我们的研究引入了一个大规模的多任务数据集([PipelineManifold-QA][EngineMT-QA])，并展示了 M-Former 在将时间序列数据与自然语言理解相结合方面表现出的卓越性能。值得一提的是，我们的 0.5 亿参数模型体积小巧、运行高效，同时仍能取得出色的效果。
 
-[EngineMT-QA]:https://huggingface.co/datasets/pandalin98/EngineMT-QA
+[EngineMT-QA]:https://huggingface.co
 
 ## Features
 
-- 📊 **预训练模型**：在 Hugging Face 上可直接使用的 ITFormer 模型([0.5B][ITFormer0.5B], [3B][ITFormer3B], [7B][ITFormer7B])。
+- 📊 **预训练模型**：在 Hugging Face 上可直接使用的 M-Former 模型([0.5B][M-Former0.5B], [3B][M-Former3B], [7B][M-Former7B])。
 - 🚀 **轻量且高效**：0.5 亿参数的模型具备强大的时态问答能力，并且易于部署。([Qwen2.5-Instruct][Qwen2.5-Instruct])
 - 🎯 **一键式脚本**：提供用于预训练、SFT（序列到序列训练）和并行推理的自动化脚本。
 - 📈 **高性能**：在时态文本问答基准测试中取得了最先进的结果。
 - 🌐 **分布式支持**：与 `accelerate` 完全兼容，适用于多 GPU 训练和推理。
 
-[ITFormer0.5B]:https://huggingface.co/pandalin98/ITFormer-0.5B
-[ITFormer3B]:https://huggingface.co/pandalin98/ITFormer-3B
-[ITFormer7B]:https://huggingface.co/pandalin98/ITFormer-7B
+[M-Former0.5B]:https://huggingface.co
+
+[M-Former3B]:https://huggingface.co
+
+[M-Former7B]:https://huggingface.co
+
 [Qwen2.5-Instruct]:https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct
 
-## Quick Start
+## Quick Start 
 
 ### 1. Organize Directory Structure
 
 下载模型和数据集后，请按照以下方式整理您的文件：
 
 <pre>
-ITFormer-ICML25/
+M-Former/
 ├── dataset/
-│   ├── dataset.py                   # EngineMT-QA的辅助文件
-│   └── datasets/                    # 将 EngineMT-QA 数据集文件放置在此处
+│   ├── dataset.py                   # PipelineManifold-QA的辅助文件
+│   └── datasets/                    # 将 PipelineManifold-QA 数据集文件放置在此处
 │       ├── time_series_data.h5
 │       ├── train_qa.jsonl
 │       └── test_qa.jsonl
@@ -42,7 +45,7 @@ ITFormer-ICML25/
 ├── LLM/                             # 基础 Qwen2.5-Instruct 模型
 │   └── Qwen2.5-0.5B-Instruct/
 ├── checkpoints/
-│   └── ITFormer-0.5B/               # ITFormer model 的检查点
+│   └── M-Former-0.5B/               # M-Former model 的检查点
 │
 ├── yaml/                            # 参数配置
 │   ├── accelerate_config.yaml
@@ -51,8 +54,8 @@ ITFormer-ICML25/
 ├── .venv_linux/                     # Linux 虚拟环境（python3.11）
 ├── requirements.txt                 # 该项目所依赖的所有库及其版本
 │
-├── models/                          # ITFormer的定义
-│   ├── ITFormer.py
+├── models/                          # M-Former的定义
+│   ├── M-Former.py
 │   ├── TimeLanguageModel.py
 │   ├── TimeSeriesEncoder.py
 │   └── layers/
@@ -78,7 +81,7 @@ ITFormer-ICML25/
 ├── save/                          # 保存模型
 │   ├── pretrain/                    # 训练好的TimeSeries Encoder
 │   ├── pretrain_ts_small/           # TimeSeries Encoder的临时存档
-│   └── sft_qwen2.5_0.5B/            # 训练好的ITFormer+LLM
+│   └── sft_qwen2.5_0.5B/            # 训练好的LLM
 ├── swanlog/                       # 由 SwanLab 库生成的日志文件夹
 │   └── run-xxx/
 ├── inference_results/             # Inference的结果
@@ -175,7 +178,7 @@ bash scripts/run_inference.sh
 ```
 
 该推理脚本将：
-- 加载 ITFormer 及其对应的 Qwen2.5-Instruct 版本。
+- 加载 M-Former 及其对应的 Qwen2.5-Instruct 版本。
 - 将数据分配到所有可用的 GPU 上。
 - 对结果进行汇总并保存到 `inference_results/` 目录以及 `output_result_all.json` 文件中。
 
@@ -203,7 +206,7 @@ bash scripts/run_pretrain.sh
 
 ### B. Supervised Fine-Tuning (SFT)
 
-阶段 B 执行端到端的SFT，通过ITFormer将TimeSeriesEncoder与LLM桥接。
+阶段 B 执行端到端的SFT，通M-将TimeSeriesEncoder与LLM桥接。
 ```bash
 # # 单步 SFT（需预先加载 ts_encoder 的权重）
 bash scripts/run_sft.sh
@@ -244,6 +247,17 @@ bash scripts/run_sft.sh
 - Cross-modal attention mechanisms跨模态注意力机制
 - Question-answering head for generation生成式问答头
 
+
+模型架构：
+- Time series encoder（处理时序数据）
+- Large language model大型语言模型 (Qwen2.5 variants)
+- M-Former (TSE与LLM的桥梁)
+
+M-Former的核心组件：
+- 门控任务记忆融合 (Gated Task-Memory Fusion, GTMF)：输入用户的问题输入文本x,定义可学习的记忆向量L,写一个门控：i(x,L)*f1(x)+j(x,L)*f2(L)=O；
+- 记忆时频注意力 ( Memory Time Frequency Attention，MTFA): 设置三个编码器（时域，频域，时频域）然后使用记忆向量进行查询后，门控相加；
+
+记忆时间注意力 (Memory Time Attention, MTA)：设置两个编码器（一个全局，一个掩码）然后使用记忆向量进行查询后，门控相加；
 ## Performance Expectations
 
 ITFormer 模型性能：
@@ -265,23 +279,3 @@ ITFormer 模型性能：
 4. 监控推理运行期间的内存使用情况
 5. 检查生成的结果和指标目录 inference_results/
 6. 验证 yaml/infer.yaml 中的配置路径是否与您的目录结构匹配
-
-## Model Architecture
-
-ITFormer利用指令感知时间序列转换器**将时间特征与文本查询对齐，然后将它们输入到大型语言模型中。该框架被设计为参数高效，在SFT期间冻结LLM和TS编码器，同时只训练ITFormer和投影层。
-## Citation
-
-If you use this code in your research, please cite:
-
-```bibtex
-@inproceedings{wang2025itformer,
-  title={ITFormer: Bridging Time Series and Natural Language for Multi-Modal QA with Large-Scale Multitask Dataset},
-  author={Yilin Wang and Peixuan Lei and Jie Song and Yuzhe Hao and Tao Chen and Yuxuan Zhang and Lei Jia and Yuanxiang Li and Zhongyu Wei},
-  booktitle={International Conference on Machine Learning (ICML)},
-  year={2025}
-}
-```
-
-## License
-
-MIT License — see the LICENSE file for details.
