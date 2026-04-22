@@ -11,12 +11,28 @@ __pycache__/
 .idea/
 .vscode/
 
-# 忽略数据集
-./dataset
-
-# 忽略模型大文件 (如果使用了 LFS 也要写上)
+# 忽略大文件和模型
 *.bin
 *.pt
 *.pth
+*.safetensors
+LLM/
+save/
+swanlog/
 
-./LLM/Qwen2.5-0.5B-Instruct
+# 忽略原始数据和中间处理数据
+dataset/original_data/
+dataset/processing_data/
+dataset/steps/
+dataset/datasets/*.h5
+
+# 忽略临时文件和验证脚本
+_verify_dataset*.py
+tmp_check.py
+clean_dataset.log
+metrics_eval_*.txt
+output_result_all.json
+*Zone.Identifier
+
+# 忽略推理结果
+inference_results/

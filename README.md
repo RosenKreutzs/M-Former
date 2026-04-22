@@ -43,20 +43,21 @@ M-Former/
 │   │   └── test_qa.jsonl
 │   ├── original_data/               # 原始实验数据
 │   ├── processing_data/             # 中间处理数据
-│   ├── 1. Inclined_pipe15_DP.py     # 15度倾斜管数据处理
-│   ├── 2. Inclined_pipe30_DP.py     # 30度倾斜管数据处理
-│   ├── 3. levelling_pipe_DP.py      # 水平管数据处理
-│   ├── 4. combined.py               # 数据合并脚本
-│   ├── 5. task_construction.py      # QA任务构建脚本
-│   ├── 6. split_train_val.py        # 训练集/验证集划分
+│   ├── steps/                       # 数据处理流水线脚本
+│   │   ├── 1. Inclined_pipe15_DP.py # 15度倾斜管数据处理
+│   │   ├── 2. Inclined_pipe30_DP.py # 30度倾斜管数据处理
+│   │   ├── 3. levelling_pipe_DP.py  # 水平管数据处理
+│   │   ├── 4. combined.py           # 数据合并脚本
+│   │   ├── 5. task_construction.py  # QA任务构建脚本
+│   │   ├── 6. split_train_val.py    # 训练集/验证集划分
+│   │   └── pipeline_data.json       # 管道元数据
 │   └── pipeline_data.json           # 生成的完整数据集
 │
 ├── models/                          # 模型定义
 │   ├── __init__.py
 │   ├── MFormer.py                   # MFormer 核心实现（MinimalLRU, BiLRU, MemoryTimeUnit）
 │   ├── TimeLanguageModel.py         # 时间语言模型（TLM）整体架构
-│   ├── TimeSeriesEncoder.py         # 时间序列编码器
-│   └── TimeLanguageModel0.py        # TLM 早期版本备份
+│   └── TimeSeriesEncoder.py         # 时间序列编码器
 │
 ├── utils/                           # 工具函数
 │   ├── __init__.py
@@ -75,6 +76,7 @@ M-Former/
 │   ├── run_pretrain.sh              # 预训练启动脚本
 │   ├── run_sft.sh                   # SFT 训练启动脚本
 │   ├── run_inference.sh             # 推理启动脚本
+│   ├── run_clean.sh                 # 数据清洗脚本
 │   ├── run_all.sh                   # 全流程运行脚本
 │   └── infra.bash                   # 基础设施脚本
 │
@@ -83,20 +85,23 @@ M-Former/
 │   └── infer.yaml                   # 推理参数配置
 │
 ├── LLM/                             # 基础语言模型
-│   └── Qwen2.5-0.5B-Instruct/       # Qwen2.5 指令模型
+│   └── Qwen2.5-0.5B-Instruct/      # Qwen2.5 指令模型
 │
 ├── assets/                          # 静态资源（图片等）
 ├── save/                            # 模型保存目录
 │   ├── pretrain/                    # 预训练模型
 │   ├── pretrain_ts_small/           # 小型预训练模型
-│   └── sft_qwen2.5_0.5B/            # SFT 微调后模型
+│   └── sft_qwen2.5_0.5B/           # SFT 微调后模型
 │
+├── reference/                       # 参考文献
 ├── swanlog/                         # SwanLab 训练日志
 ├── inference_results/               # 推理结果输出
 ├── .venv_linux/                     # Python 虚拟环境
 ├── train_pretrain.py                # 预训练入口
 ├── train_sft.py                     # SFT 训练入口
 ├── inference.py                     # 推理入口
+├── clean_dataset.py                 # 数据集清洗工具
+├── verify_qa.py                     # QA数据验证工具
 ├── requirements.txt                 # Python 依赖
 ├── .gitignore                       # Git 忽略配置
 └── README.md                        # 项目说明文档
