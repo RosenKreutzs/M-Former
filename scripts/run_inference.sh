@@ -8,9 +8,9 @@ export PYTHONWARNINGS="ignore::FutureWarning:transformers.utils.hub"
 
 accelerate launch --config_file yaml/accelerate_config.yaml inference.py \
     --config yaml/infer.yaml \
-    --model_checkpoint save/sft_qwen2.5_0.5B/checkpoint-2820 \
+    --model_checkpoint save/sft_qwen2.5_0.5B/checkpoint-1800 \
     --output_dir inference_results \
-    --batch_size 12 \
+    --batch_size 128 \
     --num_workers 4 \
     --max_new_tokens 128
 
