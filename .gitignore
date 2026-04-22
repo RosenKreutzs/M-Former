@@ -19,6 +19,7 @@ __pycache__/
 LLM/
 save/
 swanlog/
+reference/
 
 # 忽略原始数据和中间处理数据
 dataset/original_data/
